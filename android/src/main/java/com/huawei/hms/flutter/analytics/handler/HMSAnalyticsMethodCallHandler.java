@@ -21,6 +21,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.huawei.agconnect.common.network.AccessNetworkManager;
 import com.huawei.hms.flutter.analytics.HMSAnalyticsModule;
 import com.huawei.hms.flutter.analytics.logger.HMSLogger;
 
@@ -156,6 +157,7 @@ public class HMSAnalyticsMethodCallHandler implements MethodCallHandler {
                 HMSLogger.getInstance(weakContext.get()).sendSingleEvent(methodCall.method);
                 break;
             case getInstance:
+                AccessNetworkManager.getInstance().setAccessNetwork(true);
                 analyticsModule.getInstance(methodCall, result);
                 HMSLogger.getInstance(weakContext.get()).sendSingleEvent(methodCall.method);
                 break;

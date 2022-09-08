@@ -16,7 +16,7 @@ HUAWEI Analytics Kit plugin for Flutter. Analytics Kit offers you a range of pre
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'HiAnalytics' , '5.2.0.300'
+  s.dependency 'HiAnalytics' , '6.7.0.300'
   s.platform = :ios, '9.0'
   s.static_framework = true
 
