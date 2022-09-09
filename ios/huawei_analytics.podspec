@@ -3,7 +3,7 @@
 # Run `pod lib lint analytics.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'huawei_analytics_plus'
+  s.name             = 'huawei_analytics'
   s.version          = '6.7.0+300'
   s.summary          = 'HUAWEI Analytics Kit plugin for Flutter.'
   s.description      = <<-DESC
