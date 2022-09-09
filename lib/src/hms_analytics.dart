@@ -15,6 +15,7 @@
 */
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 
@@ -30,7 +31,9 @@ class HMSAnalytics {
     final MethodChannel _channel =
         const MethodChannel('com.huawei.hms.flutter.analytics');
     final _instance = HMSAnalytics._getInstance(_channel);
-    await _channel.invokeMethod('getInstance', {'routePolicy': routePolicy});
+    if (Platform.isAndroid) {
+      await _channel.invokeMethod('getInstance', {'routePolicy': routePolicy});
+    }
     return _instance;
   }
 
@@ -38,22 +41,26 @@ class HMSAnalytics {
   ///
   ///  [note] This function is specifically used by Android Platforms.
   Future<void> enableLog() async {
-    await _channel.invokeMethod('enableLog', {});
+    if (Platform.isAndroid) {
+      await _channel.invokeMethod('enableLog', {});
+    }
   }
 
   /// Enables the debug log function and sets the minimum log level.
   ///
   /// [note] This function is specifically used by Android Platforms.
   Future<void> enableLogWithLevel(String logLevel) async {
-    if (!(logLevel == "DEBUG" ||
-        logLevel == "INFO" ||
-        logLevel == "WARN" ||
-        logLevel == "ERROR")) {
-      throw ArgumentError.value(
-          logLevel, "logLevel", "Possible options [DEBUG, INFO, WARN, ERROR]");
-    }
+    if (Platform.isAndroid) {
+      if (!(logLevel == "DEBUG" ||
+          logLevel == "INFO" ||
+          logLevel == "WARN" ||
+          logLevel == "ERROR")) {
+        throw ArgumentError.value(logLevel, "logLevel",
+            "Possible options [DEBUG, INFO, WARN, ERROR]");
+      }
 
-    await _channel.invokeMethod('enableLogWithLevel', {'logLevel': logLevel});
+      await _channel.invokeMethod('enableLogWithLevel', {'logLevel': logLevel});
+    }
   }
 
   /// Set a user ID.
@@ -83,15 +90,19 @@ class HMSAnalytics {
   /// [note] This function is specifically used by Android Platforms.
   @deprecated
   Future<void> setPushToken(String token) async {
-    await _channel.invokeMethod('setPushToken', {'': token});
+    if (Platform.isAndroid) {
+      await _channel.invokeMethod('setPushToken', {'': token});
+    }
   }
 
   /// Sets the minimum interval for starting a new session.
   ///
   /// [note] This function is specifically used by Android Platforms.
   Future<void> setMinActivitySessions(int interval) async {
-    await _channel
-        .invokeMethod('setMinActivitySessions', {'interval': interval});
+    if (Platform.isAndroid) {
+      await _channel
+          .invokeMethod('setMinActivitySessions', {'interval': interval});
+    }
   }
 
   /// Sets the session timeout interval.
@@ -136,16 +147,20 @@ class HMSAnalytics {
   ///
   ///  [note] This function is specifically used by Android Platforms.
   Future<void> pageStart(String pageName, String pageClassOverride) async {
-    dynamic params = {
-      'pageName': pageName,
-      'pageClassOverride': pageClassOverride,
-    };
-    await _channel.invokeMethod('pageStart', params);
+    if (Platform.isAndroid) {
+      dynamic params = {
+        'pageName': pageName,
+        'pageClassOverride': pageClassOverride,
+      };
+      await _channel.invokeMethod('pageStart', params);
+    }
   }
 
   /// Defines a custom page exit event.
   Future<void> pageEnd(String pageName) async {
-    await _channel.invokeMethod('pageEnd', {'pageName': pageName});
+    if (Platform.isAndroid) {
+      await _channel.invokeMethod('pageEnd', {'pageName': pageName});
+    }
   }
 
   /// Sets data reporting policies.
@@ -186,8 +201,12 @@ class HMSAnalytics {
   /// @param reportPolicyType : Event reporting policy name.
   /// [note] This function is specifically used by Android Platforms.
   Future<int?> getReportPolicyThreshold(String policyType) async {
-    return await _channel.invokeMethod(
-        'getReportPolicyThreshold', {'reportPolicyType': policyType});
+    if (Platform.isAndroid) {
+      return await _channel.invokeMethod(
+          'getReportPolicyThreshold', {'reportPolicyType': policyType});
+    }else{
+      return null;
+    }
   }
 
   /// Specifies whether to enable restriction of HUAWEI Analytics.
@@ -244,8 +263,10 @@ class HMSAnalytics {
   ///
   /// The setting takes effect only when the method is called for the first time.
   Future<void> setChannel(String channel) async {
-    dynamic params = {'channel': channel};
-    await _channel.invokeMethod('setChannel', params);
+    if (Platform.isAndroid) {
+      dynamic params = {'channel': channel};
+      await _channel.invokeMethod('setChannel', params);
+    }
   }
 
   /// Sets whether to collect system attributes.
