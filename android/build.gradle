@@ -41,5 +41,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.huawei.hms:hianalytics:6.7.0.300'
+    implementation 'com.huawei.hms:hianalytics:6.8.0.300'
 }
