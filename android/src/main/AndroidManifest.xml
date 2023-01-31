@@ -6,5 +6,10 @@
         <meta-data
             android:name="com.huawei.agconnect.AccessNetwork"
             android:value="false" />
+
+        <meta-data
+                android:name="analyticskit_pushtoken_collection_enabled"
+                android:value="false">
+        </meta-data>
     </application>
 </manifest>
