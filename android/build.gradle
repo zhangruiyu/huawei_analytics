@@ -30,6 +30,7 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 30
+        consumerProguardFiles 'proguard-rules.pro'
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -41,5 +42,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.huawei.hms:hianalytics:6.7.0.300'
+    implementation 'com.huawei.hms:hianalytics:6.9.0.302'
 }
